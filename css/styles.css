@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    min-height: 100vh;
+    margin: 0px auto;
+    padding: 10px;
+}
+
+header {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px;
+}
+
+header h1 {
+    font-size: 36px;
+    padding: 10px;
+}
+
+main h2 {
+    font-size: 24px;
+    padding: 10px;
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main p {
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logBookForm,
+.logBookMessages {
+    border: 2px solid black;
+    border-radius: 25px;
+    width: 600px;
+    margin: 10px auto;
+}
+
+.formInput p {
+    padding: 5px;
+}
+
+.formInput p label {
+    display: inline-block;
+    padding: 5px;
+    text-align: right;
+    width: 150px;
+}
+
+.formInput p input {
+    height: 20px;
+    width: 350px;
+    border: 1px solid gainsboro;
+    padding: 5px;
+}
+
+.formInput p input[type=submit] {
+    display: block;
+    margin: 5px auto;
+    height: 40px;
+    background-color: darkorange;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.formInput p textarea {
+    height: 60px;
+    width: 350px;
+    border: 1px solid gainsboro;
+    padding: 5px;
+    vertical-align: text-top;
+}
+
+.message {
+    border: 2px solid lightgray;
+    border-radius: 25px;
+    width: 550px;
+    margin: 10px auto;
+}
