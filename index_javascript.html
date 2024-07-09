@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Guest Book</title>
+    <link href="css/styles.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>My Website</h1>
+        </header>
+        <main>
+            <h2>Thanks for stopping by!</h2>
+            <p>This website receives many visitors and each one of you is important to me.</p>
+            <p>Please leave a message in my guest book to mark your time here.</p>
+
+            <div class="logBookForm">
+                <div class="formInput">
+                    <p>
+                        <label for="guestName">Name</label>
+                        <input type="text" name="guestName" maxlength="50" id="guestName">
+                    </p>
+                </div>
+                <div class="formInput">
+                    <p>
+                        <label for="guestTel">Phone Number</label>
+                        <input type="tel" name="guestTel" maxlength="12" id="guestTel">
+                    </p>
+                </div>
+                <div class="formInput">
+                    <p>
+                        <label for="guestMessage">Message</label>
+                        <textarea name="guestMessage" id="guestMessage"></textarea>
+                    </p>
+                </div>
+                <div class="formInput">
+                    <p>
+                        <input type="submit" name="saveMessage" value="Save Message" onclick="sendMessage()">
+                    </p>
+                </div>
+            </div>
+
+            <div class="logBookMessages" id="guestBook">
+                <div class="message">
+                    <p>Alice Wonderland - 655 654 321</p>
+                    <p>This is a wonderful website. Well done.</p>
+                </div>
+                <div class="message">
+                    <p>Wonder Woman - 655 654 321</p>
+                    <p>I had a great time here. Thanks for having me.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showNewMessage(guestName, phoneNumber, guestMessage) {
+            let newMessage = document.createElement("div");
+            newMessage.setAttribute("class", "message");
+
+            let authorParagraph = document.createElement("p");
+            authorParagraph.innerHTML = guestName + " - " + phoneNumber;
+
+            let messageParagraph = document.createElement("p");
+            messageParagraph.innerHTML = guestMessage;
+
+            newMessage.append(authorParagraph);
+            newMessage.append(messageParagraph);
+
+            document.getElementById("guestBook").append(newMessage);
+
+        }
+
+        function sendMessage() {
+            let guestName = document.getElementById("guestName").value;
+            let guestTel = document.getElementById("guestTel").value;
+            let guestMessage = document.getElementById("guestMessage").value;
+
+            showNewMessage(guestName, guestTel, guestMessage);
+        }
+    </script>
+
+</body>
+
+</html>
