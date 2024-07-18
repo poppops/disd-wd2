@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>My Guest Book</title>
     <link href="css/styles.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
 </head>
 
 <body>
@@ -38,7 +39,7 @@
                 </div>
                 <div class="formInput">
                     <p>
-                        <input type="submit" name="saveMessage" value="Save Message" onclick="sendMessage()">
+                        <input type="submit" name="saveMessage" value="Save Message" onclick="jquerySendMessage()">
                     </p>
                 </div>
             </div>
@@ -60,7 +61,7 @@
             return document.getElementById(id).value;
         }
 
-        function sendMessage(){
+        function sendMessage() {
             let name = getValue("guestName");
             let number = getValue("guestTel");
             let message = getValue("guestMessage");
@@ -70,6 +71,18 @@
             document.getElementById("guestName").value = "";
             document.getElementById("guestTel").value = "";
             document.getElementById("guestMessage").value = "";
+        }
+
+        function jquerySendMessage() {
+            let name = $("#guestName").val();
+            let number = $("#guestTel").val();
+            let message = $("#guestMessage").val();
+
+            jqueryDisplayMessage(name, number, message);
+
+            $("#guestName").val("");
+            $("#guestTel").val("");
+            $("#guestMessage").val("")
         }
 
         function displayMessage(name, number, message) {
@@ -87,14 +100,37 @@
             document.getElementById("messages").append(messageDiv);
         }
 
+        function jqueryDisplayMessage(name, number, message) {
+            $("#messages").append(`
+            <div class="message">
+                <p>${name} - ${number}</p>
+                <p>${message}</p>
+            </div>`);
+        }
+
         let savedMessages = [
-            {name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!"},
-            {name: "Blessing Tepet", number: "9876543", message: "Today is Monday!"},
+            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
+            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
+            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
+            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
+            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
+            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
+            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
+            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
+            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
+            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
+            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
+            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
         ];
+
+        $.get("js/messages.json", function(data) {
+            console.log(data);
+        })
 
         savedMessages.forEach((savedMessage) => {
             displayMessage(savedMessage.name, savedMessage.number, savedMessage.message);
         })
+
     </script>
 </body>
 

@@ -57,22 +57,28 @@
         </main>
     </div>
     <script>
-        console.log(jQuery("h1").html());
-
         function saveMessage() {
-            let guestName = jQuery('#guestName').val();
-            let guestTel = jQuery('#guestTel').val();
-            let guestMessage = jQuery('#guestMessage').val();
+            let guestName = $('#guestName').val();
+            let guestTel = $('#guestTel').val();
+            let guestMessage = $('#guestMessage').val();
 
-            jQuery(".logBookMessages").append('<div class="message"><p>' + guestName + ' - ' + guestTel + '</p><p>' + guestMessage + '</p></div>');
+            $(".logBookMessages").append(
+                $('<div class="message"></div>')
+                    .append($('<p></p>').html(guestName + ' - ' + guestTel))
+                    .append($('<p></p>').html(guestMessage))
+            );
             resetForm();
         }
 
         function resetForm() {
-            jQuery("#guestName").val("");
-            jQuery("#guestTel").val("");
-            jQuery("#guestMessage").val("");
+            $("#guestName").val("");
+            $("#guestTel").val("");
+            $("#guestMessage").val("");
         }
+
+        $(document).ready(() => {
+            alert("Hello, jQuery!");
+        })
     </script>
 </body>
 

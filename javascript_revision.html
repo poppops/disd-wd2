@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title>JavaScript Revision</title>
+</head>
+
+<body>
+    <input type="button" id="doSomething" value="Do Something" onclick="arithmeticOperations(9,3)" />
+    <input type="button" id="doSomethingElse" value="Do Something Else" onclick="arithmeticOperations(9,3)" />
+    <input type="button" id="doSomethingDifferent" value="Do Something Different" onclick="arithmeticOperations(9,3)" />
+    <script>
+        // Write a function called arithmeticOperations 
+        // which accepts 2 numbers 
+        // and logs the output of 
+        // adding, subtracting, multiplying and dividing them.
+
+        function arithmeticOperations(number1, number2) {
+            console.log(`${number1} + ${number2} = ${(number1 + number2)}`);
+            console.log(`${number1} - ${number2} = ${(number1 - number2)}`);
+            console.log(`${number1} x ${number2} = ${(number1 * number2)}`);
+            if (number2 == 0) {
+                console.log(`Cannot divide by 0`);
+            } else {
+                console.log(`${number1} / ${number2} = ${(number1 / number2)}`);
+            }
+        }
+
+        arithmeticOperations(7, 0);
+
+        // Write a function called getValue which receives an ID as an argument 
+        // and returns the value of the element referenced by the ID
+
+        function getValue(id) {
+            if (element = document.getElementById(id)) {
+                return element.value;
+            } else {
+                return "This ID does not exist";
+            }
+        }
+
+        console.log(getValue("doSomething"));
+        console.log(getValue("doSomethingElse"));
+        console.log(getValue("doSomethingDifferent"));
+        console.log(getValue("doOneMoreThing"));
+
+        // Create an array that contains the names of 7 vegetables
+        const vegetables = [
+            "kale",
+            "carrots",
+            "broccoli",
+            "tomatoes",
+            "lettuce",
+            "spinach",
+            "cucumber"
+        ];
+
+        // Loop through the array and convert each vegetable name 
+        // to uppercase letters
+
+        let upperCaseVegetables = [];
+        for (i = 0; i < vegetables.length; i++) {
+            upperCaseVegetables.push(vegetables[i].toUpperCase());
+        }
+
+        vegetables.forEach((value, index) => {
+            vegetables[index] = value.toUpperCase();
+        });
+
+        console.log(upperCaseVegetables);
+        console.log(vegetables);
+    </script>
+</body>
+
+</html>
