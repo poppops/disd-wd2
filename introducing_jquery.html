@@ -44,15 +44,7 @@
                 </div>
             </div>
 
-            <div class="logBookMessages">
-                <div class="message">
-                    <p>Alice Wonderland - 655 654 321</p>
-                    <p>This is a wonderful website. Well done.</p>
-                </div>
-                <div class="message">
-                    <p>Wonder Woman - 655 654 321</p>
-                    <p>I had a great time here. Thanks for having me.</p>
-                </div>
+            <div class="logBookMessages" id="guestBook">
             </div>
         </main>
     </div>
@@ -64,7 +56,7 @@
 
             $("#guestBook").append(
                 $('<div class="message"></div>')
-                    .append($('<p></p>').html(guestName + ' - ' + phoneNumber))
+                    .append($('<p></p>').html(guestName + ' - ' + guestTel))
                     .append($('<p></p>').html(guestMessage))
             );
             resetForm();
@@ -76,8 +68,24 @@
             $("#guestMessage").val("");
         }
 
+        function displayMessage(name, number, message) {
+            $("#guestBook").append(`
+            <div class="message">
+                <p>${name} - ${number}</p>
+                <p>${message}</p>
+            </div>`);
+        }
+
         $(document).ready(() => {
-            alert("Hello, jQuery!");
+            $.get("/js/messages.json").then((data) => {
+                console.log(data);
+
+                for (i = 0; i < data.length; i++) {
+                    let message = data[i];
+                    displayMessage(message.name, message.number, message.message);
+                }
+            })
+
         })
     </script>
 </body>
