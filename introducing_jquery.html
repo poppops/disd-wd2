@@ -62,9 +62,9 @@
             let guestTel = $('#guestTel').val();
             let guestMessage = $('#guestMessage').val();
 
-            $(".logBookMessages").append(
+            $("#guestBook").append(
                 $('<div class="message"></div>')
-                    .append($('<p></p>').html(guestName + ' - ' + guestTel))
+                    .append($('<p></p>').html(guestName + ' - ' + phoneNumber))
                     .append($('<p></p>').html(guestMessage))
             );
             resetForm();

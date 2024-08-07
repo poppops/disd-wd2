@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>My Guest Book</title>
     <link href="css/styles.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
 </head>
 
 <body>
@@ -58,29 +59,32 @@
 
     <script>
         function showNewMessage(guestName, phoneNumber, guestMessage) {
-            let newMessage = document.createElement("div");
-            newMessage.setAttribute("class", "message");
-
-            let authorParagraph = document.createElement("p");
-            authorParagraph.innerHTML = guestName + " - " + phoneNumber;
-
-            let messageParagraph = document.createElement("p");
-            messageParagraph.innerHTML = guestMessage;
-
-            newMessage.append(authorParagraph);
-            newMessage.append(messageParagraph);
-
-            document.getElementById("guestBook").append(newMessage);
-
+            $("#guestBook").append(
+                $('<div class="message"></div>')
+                    .append($('<p></p>').html(guestName + ' - ' + phoneNumber))
+                    .append($('<p></p>').html(guestMessage))
+            );
         }
 
         function sendMessage() {
-            let guestName = document.getElementById("guestName").value;
-            let guestTel = document.getElementById("guestTel").value;
-            let guestMessage = document.getElementById("guestMessage").value;
+            let guestName = $("#guestName").val();
+            let guestTel = $("#guestTel").val();
+            let guestMessage = $("#guestMessage").val();
 
             showNewMessage(guestName, guestTel, guestMessage);
+            resetForm();
         }
+
+        function resetForm() {
+            $("#guestName").val("");
+            $("#guestTel").val("");
+            $("#guestMessage").val("");
+        }
+
+
+        $(document).ready(function () {
+            alert("Hello, JQuery!");
+        })
     </script>
 
 </body>
