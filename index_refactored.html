@@ -78,6 +78,7 @@
             let number = $("#guestTel").val();
             let message = $("#guestMessage").val();
 
+            saveToDB(name, number, message);
             jqueryDisplayMessage(name, number, message);
 
             $("#guestName").val("");
@@ -108,29 +109,67 @@
             </div>`);
         }
 
-        let savedMessages = [
-            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
-            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
-            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
-            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
-            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
-            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
-            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
-            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
-            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
-            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
-            { name: "Ryan Kinsa", number: "123456789", message: "Hello, sir!" },
-            { name: "Blessing Tepet", number: "9876543", message: "Today is Monday!" },
-        ];
+        $().ready(async function () {
+            let savedMessages = await getAllMessages();
 
-        $.get("js/messages.json", function(data) {
-            console.log(data);
+            savedMessages.forEach((savedMessage) => {
+                displayMessage(savedMessage.name, savedMessage.number, savedMessage.message);
+            })
         })
 
-        savedMessages.forEach((savedMessage) => {
-            displayMessage(savedMessage.name, savedMessage.number, savedMessage.message);
-        })
+    </script>
 
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBnLkJMHvI1iie7Of3iQ097h4n0-IRiO3I",
+            authDomain: "amc-guest-book.firebaseapp.com",
+            projectId: "amc-guest-book",
+            storageBucket: "amc-guest-book.appspot.com",
+            messagingSenderId: "479690029765",
+            appId: "1:479690029765:web:2f01203f65e8d6d2e04eac",
+            measurementId: "G-1T1F5CW51V"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function saveToDB(name, number, message) {
+            try {
+                const docRef = await addDoc(collection(db, "messages"), {
+                    name: name,
+                    number: number,
+                    message: message
+                })
+                console.log("Message was saved to database with ID: ", docRef.id);
+            } catch (e) {
+                console.log("There was an error saving to the database: ", e);
+            }
+        }
+
+        // This line of code makes the saveToDB function available to 
+        // the rest of the page - it adds it the global scope.
+        window.saveToDB = saveToDB;
+
+        async function getAllMessages() {
+            const querySnapshot = await getDocs(collection(db, "messages"));
+            let savedMessages = [];
+            querySnapshot.forEach((doc) => {
+                // console.log(doc.id, "=> ", doc.data());
+                savedMessages.push(doc.data());
+            })
+
+            return savedMessages;
+        }
+        window.getAllMessages = getAllMessages;
     </script>
 </body>
 
