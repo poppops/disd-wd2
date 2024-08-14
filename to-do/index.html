@@ -15,7 +15,7 @@
             <div class="addItem">
                 <p>New Task:</p>
                 <p><textarea id="newTask"></textarea></p>
-                <p><input type="submit" id="saveTask"></p>
+                <p><input type="submit" id="saveTask" onclick="createNewListItem()"></p>
             </div>
             <div class="displayItems">
                 <ul id="toDoList">
@@ -24,13 +24,55 @@
                     <li>Add the CSS</li>
                     <li>Connect the project to firebase</li>
                     <li>Create a function to create new list items</li>
-                    <li>Create a function to create retrieve list items</li>
+                    <li>Create a function to retrieve list items</li>
                     <li>Create a function to delete list items</li>
                     <li>Create a function to mark list items as done</li>
                 </ul>
             </div>
         </div>
     </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBnLkJMHvI1iie7Of3iQ097h4n0-IRiO3I",
+            authDomain: "amc-guest-book.firebaseapp.com",
+            projectId: "amc-guest-book",
+            storageBucket: "amc-guest-book.appspot.com",
+            messagingSenderId: "479690029765",
+            appId: "1:479690029765:web:2f01203f65e8d6d2e04eac",
+            measurementId: "G-1T1F5CW51V"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function saveToDB(newTask) {
+            try {
+                const docRef = await addDoc(collection(db, "to_do_list"), {
+                    task: newTask,
+                    isComplete: false,
+                })
+                console.log("New task was saved to database with ID: ", docRef.id);
+            } catch (e) {
+                console.log("There was an error saving to the database: ", e);
+            }
+        }
+        window.saveToDB = saveToDB;
+    </script>
+    <script>
+        async function createNewListItem() {
+            const newTask = document.getElementById('newTask').value;
+            await saveToDB(newTask);
+        }
+    </script>
 </body>
 
 </html>
