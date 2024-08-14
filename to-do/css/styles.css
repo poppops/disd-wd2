@@ -1,0 +1,53 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+body {
+    background-color: black;
+}
+
+#wrapper {
+    width: 90%;
+    margin: 30px auto;
+    background-color: white;
+}
+
+header {
+    text-align: center;
+}
+
+.addItem p {
+    padding: 5px;
+    margin: 5px;
+}
+
+#newTask {
+    width: 90%;
+    height: 160px;
+    padding: 3px;
+}
+
+#content {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.addItem {
+    width: 30%;
+    height: 400px;
+}
+
+.displayItems {
+    width: 60%;
+    height: 400px;
+}
+
+#toDoList li {
+    display: block;
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 2px 0px;
+}
